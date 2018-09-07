@@ -7,3 +7,4 @@ A development starting point
   - supervisord
 - mysql:5.7
 - redis:alpine
+- node:7.2
