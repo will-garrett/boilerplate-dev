@@ -10,7 +10,7 @@ class Neo4j extends TestCase
 {
 
     public function testNeo4JClient(){
-        $pass = urlencode("tango461");
+        $pass = urlencode(get_env("NEO4J_PASS"));
         $client = ClientBuilder::create()
         ->addConnection('default', 'http://neo4j:'.$pass.'@neo4j:7474')
         ->build();

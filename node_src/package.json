@@ -1,0 +1,15 @@
+{
+  "name": "api_willgarrett_io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "William Garrett",
+  "license": "SEE LICENSE IN LICENSE",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
