@@ -35,6 +35,7 @@ class ComposerStaticInit2b1ff8e16121aaebbd988729c314e7d9
         ),
         'W' => 
         array (
+            'Will0g\\' => 7,
             'Whoops\\' => 7,
             'Webmozart\\Assert\\' => 17,
         ),
@@ -152,6 +153,10 @@ class ComposerStaticInit2b1ff8e16121aaebbd988729c314e7d9
         'XdgBaseDir\\' => 
         array (
             0 => __DIR__ . '/..' . '/dnoegel/php-xdg-base-dir/src',
+        ),
+        'Will0g\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/will0g',
         ),
         'Whoops\\' => 
         array (
@@ -4349,7 +4354,7 @@ class ComposerStaticInit2b1ff8e16121aaebbd988729c314e7d9
         'Symfony\\Polyfill\\Php72\\Php72' => __DIR__ . '/..' . '/symfony/polyfill-php72/Php72.php',
         'Tests\\CreatesApplication' => __DIR__ . '/../..' . '/tests/CreatesApplication.php',
         'Tests\\Feature\\ExampleTest' => __DIR__ . '/../..' . '/tests/Feature/ExampleTest.php',
-        'Tests\\Feature\\Neo4j' => __DIR__ . '/../..' . '/tests/Feature/Neo4j.php',
+        'Tests\\Feature\\Neo4j' => __DIR__ . '/../..' . '/tests/Feature/Neo4jTest.php',
         'Tests\\TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
         'Tests\\Unit\\ExampleTest' => __DIR__ . '/../..' . '/tests/Unit/ExampleTest.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
@@ -4386,6 +4391,7 @@ class ComposerStaticInit2b1ff8e16121aaebbd988729c314e7d9
         'Whoops\\Util\\Misc' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/Misc.php',
         'Whoops\\Util\\SystemFacade' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/SystemFacade.php',
         'Whoops\\Util\\TemplateHelper' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/TemplateHelper.php',
+        'Will0g\\Neo4j' => __DIR__ . '/../..' . '/will0g/Neo4j.php',
         'XdgBaseDir\\Xdg' => __DIR__ . '/..' . '/dnoegel/php-xdg-base-dir/src/Xdg.php',
         'phpDocumentor\\Reflection\\DocBlock' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlock.php',
         'phpDocumentor\\Reflection\\DocBlockFactory' => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src/DocBlockFactory.php',

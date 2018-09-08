@@ -6,11 +6,11 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use GraphAware\Neo4j\Client\ClientBuilder;
+use Will0g\Neo4j as NeoGeo;
 class Neo4j extends TestCase
 {
-
     public function testNeo4JClient(){
-        $pass = urlencode(get_env("NEO4J_PASS"));
+        $pass = urlencode(env('NEO4J_PASS', 'neo4j'));
         $client = ClientBuilder::create()
         ->addConnection('default', 'http://neo4j:'.$pass.'@neo4j:7474')
         ->build();
@@ -22,13 +22,22 @@ class Neo4j extends TestCase
         $this->assertArraySubset(['name'=>'Will', 'age'=>35], $record);
         
     }
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function testExample()
-    {
-        $this->assertTrue(true);
+    public function testWill0gClient(){
+        $neo4j = new NeoGeo();
+        $this->assertInstanceOf('Will0g\Neo4j', $neo4j);
+        $results = $neo4j->run('MATCH (n:Person{name:"Will"}) RETURN n');
+        $obj = $results->firstRecord()->value("n")->values();
+        $this->assertArraySubset(['name'=>'Will', 'age'=>35], $obj);
+    }
+    public function testWill0gPerson(){
+        $neo4j = new NeoGeo();
+        $id = $neo4j->createPerson([
+            'name'=>"William Garrett",
+            'email'=>"the@willgarrett.io"
+        ]);
+        $this->assertInstanceOf('GraphAware\Neo4j\Client\Formatter\Type\Node', $id);
+        $this->assertInternalType('int', $id->identity());
+//        $neo4j->deletePerson(['id'=>$id->identity()]);
+        
     }
 }

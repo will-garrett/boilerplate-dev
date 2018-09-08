@@ -1,6 +1,5 @@
 FROM ubuntu:16.04
 
-MAINTAINER Will Garrett "the+will@willgarrett.io"
 RUN apt-get update \
     && apt-get install -y locales \
     && locale-gen en_US.UTF-8

@@ -27,7 +27,8 @@
             "database/factories"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Will0g\\":"will0g/"
         }
     },
     "autoload-dev": {
