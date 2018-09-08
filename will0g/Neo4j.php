@@ -25,14 +25,22 @@ class Neo4j{
             return $node;
         }
     }
+    public function getPersonByID($idnum){
+
+    }
     public function deletePerson($args = []){
         if(!empty($args)){
-            $items = [];
-            foreach($args as $key=>$val){
-                $items[]="{$key}:\"{$val}\"";
+            if(!empty($args['id'])){
+                $query = "MATCH (s) WHERE ID(s) = {$args['id']} DETACH DELETE s";
             }
-            echo "MATCH (a:Person {".implode(",", $items)."}) DETACH DELETE a";
-            $result = $this->run("MATCH (a:Person {".implode(",", $items)."}) DETACH DELETE a");
+            else{
+                $query_items = [];
+                foreach($args as $key=>$val){
+                    $query_items[]="{$key}:\"{$val}\"";
+                }
+                $query = "MATCH (a:Person {".implode(",", $query_items)."}) DETACH DELETE a";
+            }
+            $result = $this->run($query);
             return $result;
         }
     }

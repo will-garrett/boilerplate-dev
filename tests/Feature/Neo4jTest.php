@@ -31,12 +31,30 @@ class Neo4j extends TestCase
     }
     public function testWill0gPerson(){
         $neo4j = new NeoGeo();
+        /*
         $id = $neo4j->createPerson([
             'name'=>"William Garrett",
             'email'=>"the@willgarrett.io"
         ]);
-        $this->assertInstanceOf('GraphAware\Neo4j\Client\Formatter\Type\Node', $id);
-        $this->assertInternalType('int', $id->identity());
+        */
+        //$this->assertInstanceOf('GraphAware\Neo4j\Client\Formatter\Type\Node', $id);
+        //$this->assertInternalType('int', $id->identity());
+        //$id_number = $id->identity();
+
+        $request1 = $neo4j->run('MATCH (n:Person{name:"Will"}) RETURN n');
+        echo "Size: ".$request1->size();
+        echo "\nFirst:";
+        $record = $request1->firstRecord();
+        var_dump($record);
+        echo "\nValues:";
+        var_dump($record->values());
+        
+        die();
+        $request2 = $neo4j->run('MATCH (n:Person{name:"Johan"}) RETURN n');
+        var_dump($request2);
+
+        //$neo4j->deletePerson(['id'=>$id_number]);
+        
 //        $neo4j->deletePerson(['id'=>$id->identity()]);
         
     }
