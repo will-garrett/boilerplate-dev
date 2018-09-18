@@ -3,7 +3,12 @@ services:
   app:
     container_name: willgarrett-app
     environment:
-      - NEO4J_PASS:${NEO4J_PASS}
+      - NEO4J_AUTH=neo4j/${NEO4J_PASS}
+      - MYSQL_USER:${MYSQL_USER}
+      - MYSQL_PASS:${MYSQL_PASS}
+      - MYSQL_HOST:${MYSQL_HOST}
+      - MYSQL_ROOT:${MYSQL_ROOT}
+#      - NEO4J_PASS:${NEO4J_PASS}
     build:
       context: ./docker/app
       dockerfile: Dockerfile
