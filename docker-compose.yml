@@ -4,11 +4,12 @@ services:
     container_name: willgarrett-app
     environment:
       - NEO4J_AUTH=neo4j/${NEO4J_PASS}
-      - MYSQL_USER:${MYSQL_USER}
-      - MYSQL_PASS:${MYSQL_PASS}
-      - MYSQL_HOST:${MYSQL_HOST}
-      - MYSQL_ROOT:${MYSQL_ROOT}
-#      - NEO4J_PASS:${NEO4J_PASS}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASS=${MYSQL_PASS}
+      - MYSQL_HOST=${MYSQL_HOST}
+      - MYSQL_ROOT=${MYSQL_ROOT}
+      - MYSQL_DATA=${MYSQL_DATA}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
     build:
       context: ./docker/app
       dockerfile: Dockerfile
@@ -25,6 +26,12 @@ services:
       context: ./docker/node
       dockerfile: Dockerfile
     image: willgarrett/node
+    environment:
+      - NEO4J_AUTH=neo4j/${NEO4J_PASS}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASS=${MYSQL_PASS}
+      - MYSQL_HOST=${MYSQL_HOST}
+      - MYSQL_DATA=${MYSQL_DATA}
     volumes:
      - ./node_src:/usr/app/
     ports:
@@ -37,10 +44,10 @@ services:
     ports:
      - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: "secret"
-      MYSQL_DATABASE: "homestead"
-      MYSQL_USER: "homestead"
-      MYSQL_PASSWORD: "secret"
+      - MYSQL_ROOT_PASSWORD=${MYSQL_USER}
+      - MYSQL_DATABASE=${MYSQL_DATA}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASS}
     volumes:
      - ./mysql_data:/var/lib/mysql
     networks:
@@ -55,13 +62,15 @@ services:
   neo4j:
     container_name: willgarrett-neo4j
     image: neo4j:3.0
-    ports: 
-    - "7474:7474"
+    ports:
+      - "7474:7474"
     networks:
-    - dub-net
+      - dub-net
     volumes:
-    - ./neo4j_data/data:/data
-    - ./neo4j_data/logs:/logs
+      - ./neo4j_data/data:/data
+      - ./neo4j_data/logs:/logs
+    environment:
+      - NEO4J_AUTH=neo4j/${NEO4J_PASS}
 networks:
   dub-net:
     driver: "bridge"
