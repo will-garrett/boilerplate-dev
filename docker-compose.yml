@@ -15,11 +15,14 @@ services:
       dockerfile: Dockerfile
     image: willgarrett/app
     volumes:
-     -  .:/var/www/html
+      -  .:/var/www/html
     ports:
-     - "80:80"
+      - "80:80"
+    depends_on:
+      - neo4j
+      - mysql
     networks:
-     - dub-net
+     - dub_net
   node:
     container_name: willgarrett-nodejs
     build:
@@ -28,6 +31,7 @@ services:
     image: willgarrett/node
     environment:
       - NEO4J_AUTH=neo4j/${NEO4J_PASS}
+      - NEO4J_PASS=${NEO4J_PASS}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASS=${MYSQL_PASS}
       - MYSQL_HOST=${MYSQL_HOST}
@@ -37,7 +41,10 @@ services:
     ports:
       - "3000:3000"
     networks:
-     - dub-net
+     - dub_net
+    depends_on:
+      - neo4j
+      - mysql
   mysql:
     container_name: willgarrett-mysql
     image: mysql:5.7
@@ -51,28 +58,28 @@ services:
     volumes:
      - ./mysql_data:/var/lib/mysql
     networks:
-     - dub-net
+     - dub_net
   redis:
     container_name: willgarrett-redis
     image: redis:alpine
     volumes:
      - redisdata:/data
     networks:
-     - dub-net
+     - dub_net
   neo4j:
     container_name: willgarrett-neo4j
     image: neo4j:3.0
     ports:
       - "7474:7474"
     networks:
-      - dub-net
+      - dub_net
     volumes:
       - ./neo4j_data/data:/data
       - ./neo4j_data/logs:/logs
     environment:
       - NEO4J_AUTH=neo4j/${NEO4J_PASS}
 networks:
-  dub-net:
+  dub_net:
     driver: "bridge"
 volumes:
   redisdata:

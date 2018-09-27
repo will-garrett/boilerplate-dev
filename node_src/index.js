@@ -5,10 +5,10 @@ const version = require('./version');
 const express = require('express');
 const neo4j = require('neo4j-driver').v1;
 const app = express();
-const driver = neo4j.driver("bolt://neo4j", neo4j.auth.basic("neo4j", "tango461"));
+const driver = neo4j.driver("bolt://neo4j", neo4j.auth.basic("neo4j", process.env.NEO4J_PASS));
 const session = driver.session();
 
-const resultPromise = session.writeTransaction(tx => tx.run('CREATE (a:Greeting) SET a.message = $message RETURN a.message + ", from node " + id(a)', {message: 'hello, world'}));
+const resultPromise = session.writeTransaction(tx => tx.run('CREATE (a:Greeting) SET a.message = $message, a.time=timestamp() RETURN a.message + ", from node " + id(a)', {message: 'hello, world'}));
 
 resultPromise.then(result => {
     session.close();
