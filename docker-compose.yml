@@ -15,7 +15,7 @@ services:
       dockerfile: Dockerfile
     image: willgarrett/app
     volumes:
-      -  .:/var/www/html
+      -  ./laravel:/var/www/html
     ports:
       - "80:80"
     depends_on:
@@ -34,7 +34,7 @@ services:
       - NEO4J_PASS=${NEO4J_PASS}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASS=${MYSQL_PASS}
-      - MYSQL_HOST=${MYSQL_HOST}
+      - MYSQL_HOST=willgarrett-mysql
       - MYSQL_DATA=${MYSQL_DATA}
     volumes:
      - ./node_src:/usr/app/
