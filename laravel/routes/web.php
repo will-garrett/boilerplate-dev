@@ -12,9 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome',['page_title'=>"willgarrett.io"]);
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/sysinfo', function(){
+    return view('phpinfo');
+});
