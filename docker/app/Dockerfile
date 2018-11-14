@@ -38,4 +38,20 @@ EXPOSE 80
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
+#RUN pecl install xdebug
+#RUN docker-php-ext-enable xdebug
+
+#RUN pecl install -o -f redis \
+#&& rm -rf /tmp/pear \
+#&& docker-php-ext-enable redis
+
+#RUN sed -i '1 a xdebug.remote_autostart=true' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+#RUN sed -i '1 a xdebug.remote_mode=req' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+#RUN sed -i '1 a xdebug.remote_handler=dbgp' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+#RUN sed -i '1 a xdebug.remote_connect_back=1 ' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+#RUN sed -i '1 a xdebug.remote_port=9000' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+#RUN sed -i '1 a xdebug.remote_host=192.168.1.201' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+#RUN sed -i '1 a xdebug.remote_enable=1' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+# RUN sed -i '1 a xdebug.idekey=docker' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
 CMD ["/usr/bin/supervisord"]
